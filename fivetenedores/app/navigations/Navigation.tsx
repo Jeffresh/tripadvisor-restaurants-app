@@ -4,10 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import RestaurantsStack from './RestaurantsStack';
-
+import TopRestaurants from './TopLIstsStacks';
 const NavigationStacks = createBottomTabNavigator();
 
-function MainTabs() {
+const MainTabs = () => {
   return (
     <NavigationContainer>
       <NavigationStacks.Navigator>
@@ -19,7 +19,23 @@ function MainTabs() {
             tabBarIcon: ({color, size}) => (
               <Icon
                 type="material-community"
-                name="linux"
+                name="silverware-fork-knife"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        <NavigationStacks.Screen
+          name="Top List"
+          component={TopRestaurants}
+          options={{
+            tabBarLabel: 'Ranking',
+            tabBarIcon: ({color, size}) => (
+              <Icon
+                type="material-community"
+                name="podium-gold"
                 size={size}
                 color={color}
               />
@@ -29,6 +45,6 @@ function MainTabs() {
       </NavigationStacks.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default MainTabs;
