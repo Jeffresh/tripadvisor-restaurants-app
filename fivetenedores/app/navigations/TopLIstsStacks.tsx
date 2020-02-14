@@ -4,7 +4,7 @@ import React from 'react';
 
 const TopListScreenStacks = createStackNavigator();
 
-function TopRestaurants() {
+const TopRestaurants = () => {
   return (
     <TopListScreenStacks.Navigator>
       <TopListScreenStacks.Screen
@@ -16,6 +16,6 @@ function TopRestaurants() {
       />
     </TopListScreenStacks.Navigator>
   );
-}
+};
 
 export default TopRestaurants;
