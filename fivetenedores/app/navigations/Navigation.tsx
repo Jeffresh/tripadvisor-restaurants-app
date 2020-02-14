@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import RestaurantsStack from './RestaurantsStack';
-import TopRestaurants from './TopLIstsStacks';
+import RankingRestaurantsStack from './TopLIstsStacks';
 import SearchStacks from './SearchStacks';
 
 const NavigationStacks = createBottomTabNavigator();
@@ -31,7 +31,7 @@ const MainTabs = () => {
 
         <NavigationStacks.Screen
           name="Top List"
-          component={TopRestaurants}
+          component={RankingRestaurantsStack}
           options={{
             tabBarLabel: 'Ranking',
             tabBarIcon: ({color, size}) => (
