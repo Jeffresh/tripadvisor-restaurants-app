@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RestaurantsStack from './RestaurantsStack';
 import RankingRestaurantsStack from './TopLIstsStacks';
 import SearchStacks from './SearchStacks';
+import MyAccountStacks from './MyAccountStack';
 
 const NavigationStacks = createBottomTabNavigator();
 
@@ -28,7 +29,6 @@ const MainTabs = () => {
             ),
           }}
         />
-
         <NavigationStacks.Screen
           name="Top List"
           component={RankingRestaurantsStack}
@@ -44,7 +44,6 @@ const MainTabs = () => {
             ),
           }}
         />
-
         <NavigationStacks.Screen
           name="Search"
           component={SearchStacks}
@@ -54,6 +53,21 @@ const MainTabs = () => {
               <Icon
                 type="material-community"
                 name="cloud-search-outline"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <NavigationStacks.Screen
+          name="My Account"
+          component={MyAccountStacks}
+          options={{
+            tabBarLabel: 'Account',
+            tabBarIcon: ({color, size}) => (
+              <Icon
+                type="material-community"
+                name="account-box-outline"
                 size={size}
                 color={color}
               />
