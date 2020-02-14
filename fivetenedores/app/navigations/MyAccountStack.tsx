@@ -8,10 +8,10 @@ const MyAccountStacks = () => {
   return (
     <MyAccountScreenStacks.Navigator>
       <MyAccountScreenStacks.Screen
-        name="Account"
+        name="account"
         component={MyAccount}
         options={{
-          title: 'Account',
+          title: 'My Account',
         }}
       />
     </MyAccountScreenStacks.Navigator>
