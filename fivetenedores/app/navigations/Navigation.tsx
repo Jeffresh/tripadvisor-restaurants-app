@@ -5,6 +5,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import RestaurantsStack from './RestaurantsStack';
 import TopRestaurants from './TopLIstsStacks';
+import SearchStacks from './SearchStacks';
+
 const NavigationStacks = createBottomTabNavigator();
 
 const MainTabs = () => {
@@ -36,6 +38,22 @@ const MainTabs = () => {
               <Icon
                 type="material-community"
                 name="podium-gold"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        <NavigationStacks.Screen
+          name="Search"
+          component={SearchStacks}
+          options={{
+            tabBarLabel: 'Search',
+            tabBarIcon: ({color, size}) => (
+              <Icon
+                type="material-community"
+                name="cloud-search-outline"
                 size={size}
                 color={color}
               />
