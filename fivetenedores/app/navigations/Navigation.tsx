@@ -13,7 +13,14 @@ const NavigationStacks = createBottomTabNavigator();
 const MainTabs = () => {
   return (
     <NavigationContainer>
-      <NavigationStacks.Navigator>
+      <NavigationStacks.Navigator
+        initialRouteName="Restaurants"
+        tabBarOptions={{
+          inactiveBackgroundColor: '#000',
+          activeBackgroundColor: '#1f1f1f',
+          activeTintColor: '#488f56',
+          inactiveTintColor: '#747474',
+        }}>
         <NavigationStacks.Screen
           name="Restaurants"
           component={RestaurantsStack}
