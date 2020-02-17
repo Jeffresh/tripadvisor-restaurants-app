@@ -14,7 +14,7 @@ const MainTabs = () => {
   return (
     <NavigationContainer>
       <NavigationStacks.Navigator
-        initialRouteName="Restaurants"
+        initialRouteName="My Account"
         tabBarOptions={{
           inactiveBackgroundColor: '#000',
           activeBackgroundColor: '#1f1f1f',
