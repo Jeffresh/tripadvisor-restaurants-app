@@ -1,10 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Text, Image} from 'react-native';
 import {Divider} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
-  // @ts-ignore
   return (
     <ScrollView>
       <Image
