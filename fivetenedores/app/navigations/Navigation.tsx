@@ -18,7 +18,7 @@ const MainTabs = () => {
         tabBarOptions={{
           inactiveBackgroundColor: '#000',
           activeBackgroundColor: '#1f1f1f',
-          activeTintColor: '#488f56',
+          activeTintColor: '#00a680',
           inactiveTintColor: '#747474',
         }}>
         <NavigationStacks.Screen
