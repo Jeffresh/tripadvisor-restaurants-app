@@ -2,13 +2,10 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 const Register = () => {
-  return(
+  return (
     <View>
-      <Text>
-        User register
-      </Text>
+      <Text>User register</Text>
     </View>
-
   );
 };
 
