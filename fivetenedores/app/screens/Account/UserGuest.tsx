@@ -5,7 +5,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const UserGuest = () => {
   const navigation = useNavigation();
-  console.log(navigation);
   return (
     <ScrollView style={styles.viewBody} centerContent={true}>
       <Image
