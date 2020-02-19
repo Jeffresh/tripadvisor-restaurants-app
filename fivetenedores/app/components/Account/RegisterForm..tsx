@@ -1,8 +1,11 @@
-import React from "react";
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Input, Icon, Button} from 'react-native-elements';
 
 const RegisterForm = () => {
+  const register = () => {
+    console.log('User registered');
+  };
   return (
     <View style={styles.formContainer}>
       <Input
@@ -16,6 +19,38 @@ const RegisterForm = () => {
             iconStyle={styles.iconRight}
           />
         }
+      />
+      <Input
+        placeholder="Password"
+        secureTextEntry={true}
+        containerStyle={styles.inputForm}
+        onChange={() => console.log('Updated password')}
+        rightIcon={
+          <Icon
+            name="key"
+            type="material-community"
+            iconStyle={styles.iconRight}
+          />
+        }
+      />
+      <Input
+        placeholder="Repeat Password"
+        secureTextEntry={true}
+        containerStyle={styles.inputForm}
+        onChange={() => console.log('Updated repeat password')}
+        rightIcon={
+          <Icon
+            name="key"
+            type="material-community"
+            iconStyle={styles.iconRight}
+          />
+        }
+      />
+      <Button
+        title="Join in"
+        containerStyle={styles.buttonContainerRegister}
+        buttonStyle={styles.buttonRegister}
+        onPress={register}
       />
     </View>
   );
@@ -34,6 +69,13 @@ const styles = StyleSheet.create({
   },
   iconRight: {
     color: '#c1c1c1',
+  },
+  buttonContainerRegister: {
+    marginTop: 20,
+    width: '95%',
+  },
+  buttonRegister: {
+    backgroundColor: '#00a680',
   },
 });
 
