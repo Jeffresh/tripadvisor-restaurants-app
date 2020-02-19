@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Icon, Button} from 'react-native-elements';
+import {validateEmail} from '../../utils/Validation';
 
 const RegisterForm = () => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -9,10 +10,19 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const register = () => {
-    console.log('User registered');
-    console.log(`Email: ${email}`);
-    console.log(`Password: ${password}`);
-    console.log(`Repeat Password: ${repeatPassword}`);
+    if (!email || !password || !repeatPassword) {
+      console.log('You have a Empty field');
+    } else {
+      if (!validateEmail(email)) {
+        console.log('Invalid email');
+      } else {
+        if (password! === repeatPassword) {
+          console.log('Passwords do not match');
+        } else {
+          console.log('Correct passwords');
+        }
+      }
+    }
   };
   return (
     <View style={styles.formContainer}>
