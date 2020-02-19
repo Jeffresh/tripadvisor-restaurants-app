@@ -39,7 +39,6 @@ const CreateAccount = (props: {navigation: any}) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   logo: {
     width: '100%',
