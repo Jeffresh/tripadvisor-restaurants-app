@@ -32,7 +32,13 @@ const LoginForm = () => {
           />
         }
       />
-      <Button title="Sign in" />
+      <Button
+        title="Sign in"
+        containerStyle={styles.buttonContainerLogin}
+        buttonStyle={styles.buttonLogin}
+        onPress={login}
+      />
+      <Loading isVisible={isVisibleLoading} text="Signing in" />
     </View>
   );
 };
@@ -50,6 +56,13 @@ const styles = StyleSheet.create({
   },
   iconRight: {
     color: '#c1c1c1',
+  },
+  buttonContainerLogin: {
+    marginTop: 20,
+    width: '95%',
+  },
+  buttonLogin: {
+    backgroundColor: '#00a680',
   },
 });
 export default LoginForm;
