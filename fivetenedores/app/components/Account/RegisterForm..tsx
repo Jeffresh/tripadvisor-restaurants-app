@@ -4,7 +4,8 @@ import {Input, Icon, Button} from 'react-native-elements';
 import {validateEmail} from '../../utils/Validation';
 import * as firebase from 'firebase';
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+  const {toastRef} = props;
   const [hidePassword, setHidePassword] = useState(true);
   const [hideRepeatPassword, setRepeatHidePassword] = useState(true);
   const [email, setEmail] = useState('');
@@ -13,20 +14,21 @@ const RegisterForm = () => {
 
   const register = async () => {
     if (!email || !password || !repeatPassword) {
-      console.log('Error: You have a Empty field');
+      // console.log(toastRef);
+      toastRef.current.show('Error: All fields must be filled in');
     } else {
       if (!validateEmail(email)) {
-        console.log('Error: Invalid email');
+        toastRef.current.show('Error: Invalid email format');
       } else {
         if (password !== repeatPassword) {
-          console.log('Error: Passwords do not match');
+          toastRef.current.show('Error: passwords must match');
         } else {
           try {
             const auth = await firebase.auth();
             await auth.createUserWithEmailAndPassword(email, password);
-            console.log('user created correctly');
+            toastRef.current.show('User created correctly');
           } catch {
-            console.log('Error: cannot create the user');
+            toastRef.current.show('Error: user could not be crated');
           }
         }
       }
