@@ -17,7 +17,7 @@ const Login = () => {
         resizeMode="contain"
       />
       <View style={styles.viewContainer}>
-        <LoginForm toastRef={toastRef} />
+        <LoginForm toastRef={toastRef} navigation={navigation} />
         <CreateAccount navigation={navigation} />
       </View>
       <Divider style={styles.divider} />

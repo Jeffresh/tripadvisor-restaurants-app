@@ -6,11 +6,11 @@ import * as firebase from 'firebase';
 import Loading from '../Loading';
 
 const LoginForm = (props: any) => {
-  const {toastRef} = props;
+  const {toastRef, navigation} = props;
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isVisibleLoading, setIsVisibleLoading ] = useState(false);
+  const [isVisibleLoading, setIsVisibleLoading] = useState(false);
   const login = async () => {
     setIsVisibleLoading(true);
     if (!email || !password) {
@@ -22,7 +22,7 @@ const LoginForm = (props: any) => {
         try {
           const auth = await firebase.auth();
           await auth.signInWithEmailAndPassword(email, password);
-          toastRef.current.show('User logged');
+          navigation.navigate('Account');
         } catch {
           toastRef.current.show('Error: cannot sign in');
         }
