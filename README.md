@@ -1,3 +1,3 @@
 # Tripadvisor alike app for restaurants
 
-Tripadvisor de restaurantes haciendo uso de React Native Hooks, Expo y Firebase y un sistema the login completo
+Using React Native framework with Hooks, Expo y Firebase and a complete system of login ( also Facebook login)
