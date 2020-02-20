@@ -3,16 +3,19 @@ import {StyleSheet, View} from 'react-native';
 import {Input, Icon, Button} from 'react-native-elements';
 import {validateEmail} from '../../utils/Validation';
 import * as firebase from 'firebase';
+import Loading from '../Loading';
 
-const RegisterForm = (props) => {
-  const {toastRef} = props;
+const RegisterForm = (props: {navigationRef: any; toastRef: any}) => {
+  const {toastRef, navigationRef} = props;
   const [hidePassword, setHidePassword] = useState(true);
   const [hideRepeatPassword, setRepeatHidePassword] = useState(true);
+  const [isVisibleLoading, setIsVisibleLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
   const register = async () => {
+    setIsVisibleLoading(true);
     if (!email || !password || !repeatPassword) {
       // console.log(toastRef);
       toastRef.current.show('Error: All fields must be filled in');
@@ -27,12 +30,14 @@ const RegisterForm = (props) => {
             const auth = await firebase.auth();
             await auth.createUserWithEmailAndPassword(email, password);
             toastRef.current.show('User created correctly');
+            navigationRef.navigate('Account');
           } catch {
             toastRef.current.show('Error: user could not be crated');
           }
         }
       }
     }
+    setIsVisibleLoading(false);
   };
   return (
     <View style={styles.formContainer}>
@@ -82,6 +87,8 @@ const RegisterForm = (props) => {
         buttonStyle={styles.buttonRegister}
         onPress={register}
       />
+
+      <Loading isVisible={isVisibleLoading} text="Creating account..." />
     </View>
   );
 };
