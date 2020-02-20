@@ -17,7 +17,6 @@ const RegisterForm = (props: {navigationRef: any; toastRef: any}) => {
   const register = async () => {
     setIsVisibleLoading(true);
     if (!email || !password || !repeatPassword) {
-      // console.log(toastRef);
       toastRef.current.show('Error: All fields must be filled in');
     } else {
       if (!validateEmail(email)) {
