@@ -4,12 +4,13 @@ import {Input, Icon, Button} from 'react-native-elements';
 import {validateEmail} from '../../utils/Validation';
 import * as firebase from 'firebase';
 
-const RegisterForm = async () => {
+const RegisterForm = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [hideRepeatPassword, setRepeatHidePassword] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+
   const register = async () => {
     if (!email || !password || !repeatPassword) {
       console.log('Error: You have a Empty field');
