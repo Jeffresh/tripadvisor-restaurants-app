@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {ListItem} from 'react-native-elements';
-import Modal from '../Modal';
+import Modal from '../Modal'
+import ChangeDisplayNameForm from './ChangeDisplayName';
+import ChangeEmailForm from './ChangeEmailForm';
+import ChangePasswordForm from './ChangePasswordForm';
 
 const styles = StyleSheet.create({
   menuItem: {
@@ -12,6 +15,7 @@ const styles = StyleSheet.create({
 
 const AccountOptions = () =>{
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [renderComponent, setRenderComponent] = useState(null);
 
   const menuOptions = [
     {
@@ -21,7 +25,7 @@ const AccountOptions = () =>{
       iconColorLeft: "#ccc",
       iconNameRight: "chevron-right",
       iconColorRight: "#ccc",
-      onPress: () => selectedComponent()
+      onPress: () => selectedComponent("displayName")
     },
     {
       title: "Change Email",
@@ -30,7 +34,7 @@ const AccountOptions = () =>{
       iconColorLeft: "#ccc",
       iconNameRight: "chevron-right",
       iconColorRight: "#ccc",
-      onPress: () => console.log("Change Email")
+      onPress: () => selectedComponent("email")
     },
     {
       title: "Change Password",
@@ -39,12 +43,27 @@ const AccountOptions = () =>{
       iconColorLeft: "#ccc",
       iconNameRight: "chevron-right",
       iconColorRight: "#ccc",
-      onPress: () => console.log("Change Password")
+      onPress: () => selectedComponent("password")
     },
   ];
 
-  const selectedComponent = () => {
-    setIsVisibleModal(true)
+  const selectedComponent = (key) => {
+    switch (key) {
+      case "displayName":
+        setRenderComponent(ChangeDisplayNameForm);
+        setIsVisibleModal(true);
+        break;
+      case "email":
+        setRenderComponent(ChangeEmailForm);
+        setIsVisibleModal(true);
+        break;
+      case "password":
+        setRenderComponent(ChangePasswordForm);
+        setIsVisibleModal(true);
+        break;
+      default:
+        break;
+    }
   };
   return(
     <View>
@@ -69,13 +88,12 @@ const AccountOptions = () =>{
 
         )
       )}
-      <Modal isVisible={isVisibleModal} setIsVisible={setIsVisibleModal}>
-        <View>
-          <Text>
-            Im in the modal.
-          </Text>
-        </View>
-      </ Modal>
+
+      {renderComponent && (
+        <Modal isVisible={isVisibleModal} setIsVisible={setIsVisibleModal}>
+          {renderComponent}
+        </ Modal>
+      )}
     </View>
   );
 };
