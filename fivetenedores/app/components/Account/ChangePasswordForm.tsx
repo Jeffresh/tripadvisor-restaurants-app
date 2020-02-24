@@ -10,3 +10,6 @@ const ChangePasswordForm = () => {
     </View>
   );
 };
+
+export default  ChangePasswordForm
+
