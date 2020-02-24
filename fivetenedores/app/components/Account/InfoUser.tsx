@@ -23,14 +23,34 @@ const InfoUser = (props) =>{
       if(result.cancelled) {
         console.log("images gallery closed");
       } else {
-        uploadImage(result.uri, uid);
+        await uploadImage(result.uri, uid);
+        await console.log("image uploaded");
+        await updatePhotoUrl(uid);
       }
     }
   };
 
-  const uploadImage = (uri, namedImage) => {
-    console.log(`URI ${uri}`);
-    console.log(`namedImage ${namedImage}`)
+  const uploadImage = async (uri, nameImage) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const ref = firebase.storage().ref().child(`avatar/${nameImage}`);
+    return ref.put(blob);
+  };
+
+  const updatePhotoUrl = uid => {
+    firebase
+      .storage()
+      .ref(`avatar/${uid}`)
+      .getDownloadURL()
+      .then(async result => {
+        const update = {
+          photoURL: result
+        };
+        await firebase.auth().currentUser.updateProfile(update);
+      }).catch(() => {
+      console.log('Error: 500 avatar')
+
+    });
   };
   return(
     <View style={styles.viewUserInfo}>
