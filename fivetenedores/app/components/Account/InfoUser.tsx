@@ -7,13 +7,20 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 const InfoUser = (props) =>{
-  const{userInfo, userInfo:{ uid, displayName, email, photoURL}} = props;
+  const {
+    userInfo, userInfo:{ uid, displayName, email, photoURL},
+    setReloadData,
+    toastRef,
+    setIsLoading,
+    setTextLoading,
+  } = props;
   const changeAvatar = async () => {
     const resultPermissions = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     const resultPermissionCamera = resultPermissions.permissions.cameraRoll.status;
 
     if(resultPermissionCamera === "denied"){
-      console.log("permissions not accepted")
+      toastRef.current.show('Its necessary accept the permissions');
+
     } else{
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
@@ -21,16 +28,17 @@ const InfoUser = (props) =>{
       });
 
       if(result.cancelled) {
-        console.log("images gallery closed");
+        toastRef.current.show('Gallery closed without chose any image')
       } else {
         await uploadImage(result.uri, uid);
-        await console.log("image uploaded");
         await updatePhotoUrl(uid);
       }
     }
   };
 
   const uploadImage = async (uri, nameImage) => {
+    setTextLoading("Updating Avatar");
+    setIsLoading(true);
     const response = await fetch(uri);
     const blob = await response.blob();
     const ref = firebase.storage().ref().child(`avatar/${nameImage}`);
@@ -47,9 +55,10 @@ const InfoUser = (props) =>{
           photoURL: result
         };
         await firebase.auth().currentUser.updateProfile(update);
-      }).catch(() => {
-      console.log('Error: 500 avatar')
-
+        setReloadData(true);
+        setIsLoading(false);
+      }).catch((e) => {
+      toastRef.currrent.show('Error: 500 avatar');
     });
   };
   return(
