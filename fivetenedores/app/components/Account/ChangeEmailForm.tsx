@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import * as firebase from 'firebase';
+import reauthenticate from '../../utils/Api';
 
 
 const styles = StyleSheet.create({
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
 
 });
 
-const ChangeEmailForm = (props) =>{
-  const {email, setIsVisible, setReloadData, toastRef} = props;
+const ChangeEmailForm = (props) => {
+  const {email, setIsVisibleModal, setReloadData, toastRef} = props;
   const [newEmail, setNewEmail] = useState("");
   const [error, setError] = useState({});
   const [hidePassword, setHidePassword] = useState(true);
@@ -33,8 +34,31 @@ const ChangeEmailForm = (props) =>{
   const [password, setPassword] = useState("");
 
   const updateEmail = () => {
-    console.log("Updated email")
+    setError({});
+    if(!newEmail || email == newEmail) {
+      setError({email: "Email cannot be the same or empty"})
+    } else {
+      setIsLoading(true);
+      reauthenticate(password).then(() => {
+        firebase
+          .auth()
+          .currentUser.updateEmail(newEmail).then(() =>{
+            setIsLoading(false);
+            setReloadData(true);
+            toastRef.current.show("Email updated");
+            setIsVisibleModal(false);
+        }).catch((e) => {
+          setError({email: `Error updating email ${e}`});
+          setIsLoading(false);
+        })
+
+      }).catch(() => {
+        setError({password: "Password incorrect"});
+        setIsLoading(false);
+      });
+    }
   };
+
   return(
     <View style={styles.view}>
       <Input
