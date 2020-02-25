@@ -19,11 +19,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const ChangeDisplayNameForm = () => {
+const ChangeDisplayNameForm = (props) => {
+  const {displayName, setIsVisibleModal, setReloadData, toastRef} = props;
+  console.log(props);
 
   const updateDisplayName = () =>{
     console.log("Name updated")
-
   };
 
   return(
@@ -31,7 +32,7 @@ const ChangeDisplayNameForm = () => {
       <Input
         placeholder='Name'
         containerStyle={styles.input}
-        // defaultValue={}
+        defaultValue={displayName && displayName}
         // onChange={}
         rightIcon={{
           type: "material-community",

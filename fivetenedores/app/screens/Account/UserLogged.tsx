@@ -51,7 +51,7 @@ const UserLogged = () => {
         setIsLoading={setIsLoading}
         setTextLoading={setTextLoading}
       />
-      <AccountOptions/>
+      <AccountOptions userInfo={userInfo} setReloadData={setReloadData} toastRef={toastRef}/>
       <Button
         title="Close session"
         onPress={() => firebase.auth().signOut()}
@@ -61,6 +61,6 @@ const UserLogged = () => {
       <Toast ref={toastRef}  position="center" opacity={0.5}/>
       <Loading text={textLoading} isVisible={isLoading}/>
     </View>
-  );
+    );
 };
 export default UserLogged;

@@ -5,6 +5,7 @@ import Modal from '../Modal'
 import ChangeDisplayNameForm from './ChangeDisplayName';
 import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
+import InfoUser from './InfoUser';
 
 const styles = StyleSheet.create({
   menuItem: {
@@ -13,7 +14,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const AccountOptions = () =>{
+const AccountOptions = (props) =>{
+  const {userInfo, setReloadData, toastRef} = props;
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [renderComponent, setRenderComponent] = useState(null);
 
@@ -50,7 +52,12 @@ const AccountOptions = () =>{
   const selectedComponent = (key) => {
     switch (key) {
       case "displayName":
-        setRenderComponent(ChangeDisplayNameForm);
+        setRenderComponent(<ChangeDisplayNameForm
+          displayName={userInfo.displayName}
+          setIsVisibleModal={setIsVisibleModal}
+          setReloadData={setReloadData}
+          toasRef={toastRef}
+        />);
         setIsVisibleModal(true);
         break;
       case "email":
@@ -84,7 +91,7 @@ const AccountOptions = () =>{
             }}
             onPress={menu.onPress}
             containerStyle={styles.menuItem}
-          />
+            />
 
         )
       )}
