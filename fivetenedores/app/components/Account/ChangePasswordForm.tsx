@@ -33,7 +33,41 @@ const ChangePasswordForm = (props) => {
   const [hideNewPasswordRepeat, setHideNewPasswordRepeat] = useState(true);
 
   const updatePassword = () => {
-    console.log("password updated");
+    setError({});
+    if(!password || !newPassword || !newPasswordRepeat){
+      let objError={};
+      !password && (objError.password = "Cant be empty");
+      !newPassword &&(objError.newPassword ="Cant be empty");
+      !newPasswordRepeat &&(objError.newPasswordRepeat =" Cant be empty");
+      setError(objError)
+    } else {
+      if(newPassword !== newPasswordRepeat) {
+        setError({
+          newPassword: "New passwords not match",
+          newPasswordRepeat: "New passwords not match",
+        });
+      } else {
+        setIsLoading(true);
+        reauthenticate(password).then(() => {
+          firebase
+            .auth()
+            .currentUser
+            .updatePassword(newPassword)
+            .then(() => {
+              setIsLoading(false);
+              toastRef.current.show("Password Updated successfully");
+              setIsVisibleModal(false);
+              firebase.auth().signOut();
+            }).catch(() =>{
+              setError({general: "Error trying to update password"});
+              setIsLoading(false);
+          });
+        }).catch(() => {
+          setError({password: "Incorrect password"});
+          setIsLoading(false);
+        });
+      }
+    }
   };
 
   return(
