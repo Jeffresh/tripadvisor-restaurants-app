@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Button, Input} from 'react-native-elements';
+import * as firebase from 'firebase';
 
 const styles = StyleSheet.create({
   view:{
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+    width: "95%",
   },
   button: {
     backgroundColor: "#00a680"
@@ -25,8 +27,32 @@ const ChangeDisplayNameForm = (props) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const updateDisplayName = () =>{
-    console.log("Name updated")
+
+  const updateDisplayName = () => {
+    console.log(props)
+    setError(null);
+    if(!newDisplayName){
+      setError("User name couldn't be empty or the same");
+    } else {
+      setIsLoading(true);
+      const update = {
+        displayName: newDisplayName
+      };
+      firebase
+        .auth()
+        .currentUser
+        .updateProfile(update)
+        .then(() => {
+          setIsLoading(false);
+          setReloadData(true);
+          toastRef.current.show("Name updated successfully");
+          setIsVisibleModal(false);
+        }).catch((e) => {
+          setError(`Error updating name${e}`);
+          setIsLoading(false);
+        }
+      )
+    }
   };
 
   return(

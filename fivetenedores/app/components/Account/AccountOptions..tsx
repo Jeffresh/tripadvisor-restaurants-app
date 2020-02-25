@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {ListItem} from 'react-native-elements';
 import Modal from '../Modal'
-import ChangeDisplayNameForm from './ChangeDisplayName';
+import ChangeDisplayNameForm from './ChangeDisplayNameForm';
 import ChangeEmailForm from './ChangeEmailForm';
 import ChangePasswordForm from './ChangePasswordForm';
 import InfoUser from './InfoUser';
@@ -52,12 +52,14 @@ const AccountOptions = (props) =>{
   const selectedComponent = (key) => {
     switch (key) {
       case "displayName":
-        setRenderComponent(<ChangeDisplayNameForm
+        setRenderComponent(
+          <ChangeDisplayNameForm
           displayName={userInfo.displayName}
           setIsVisibleModal={setIsVisibleModal}
           setReloadData={setReloadData}
-          toasRef={toastRef}
-        />);
+          toastRef={toastRef}
+          />
+          );
         setIsVisibleModal(true);
         break;
       case "email":
