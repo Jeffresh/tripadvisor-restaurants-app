@@ -67,21 +67,27 @@ const UploadImage = (props) => {
     }
   };
 
-  console.log(imagesSelected)
   return (
     <View style={styles.viewImages}>
-      <Icon
-        name="camera"
-        type="material-community"
-        color="#7a7a7a"
-        containerStyle={styles.containerIcon}
-        onPress={imageSelect}
-      />
-      <Avatar
-        onPress={() => console.log("Deleting image")}
-        style ={styles.miniatureStyle}
-        // source={{url miniature restaurant}}
-      />
+      {imagesSelected.length < 5 && (
+        <Icon
+            name="camera"
+            type="material-community"
+            color="#7a7a7a"
+            containerStyle={styles.containerIcon}
+            onPress={imageSelect}
+        />
+      )}
+
+      {imagesSelected.map((imageRestaurant, index) => (
+        <Avatar
+          key={index}
+          onPress={() => console.log("Deleting image")}
+          style ={styles.miniatureStyle}
+          source={{uri: imageRestaurant}}
+        />
+      ))}
+
     </View>
   )
 };
