@@ -1,10 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import AddButton from '../../components/AddButton'
 
-export default function Restaurants() {
+const styles = StyleSheet.create({
+  viewBody:{
+    flex: 1,
+  }
+});
+
+const Restaurants = (props) => {
   return (
-    <View>
-      <Text> Restaurants</Text>
+    <View style={styles.viewBody}>
+      <Text>Restaurants</Text>
+      <AddButton text={"Added restaurants"} />
     </View>
   );
-}
+};
+
+export default Restaurants;
