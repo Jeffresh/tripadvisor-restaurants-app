@@ -35,7 +35,7 @@ const AddRestaurantsForm = (props) => {
   return (
     <ScrollView>
       <UploadImage
-        imagesSelect={imagesSelected}
+        imagesSelected={imagesSelected}
         setImagesSelected={setImagesSelected}
         toastRef={toastRef}
       />
@@ -66,6 +66,8 @@ const UploadImage = (props) => {
       }
     }
   };
+
+  console.log(imagesSelected)
   return (
     <View style={styles.viewImages}>
       <Icon
