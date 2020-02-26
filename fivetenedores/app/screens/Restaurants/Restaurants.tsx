@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import AddButton from '../../components/AddButton'
+import * as firebase from 'firebase';
 
 const styles = StyleSheet.create({
   viewBody:{
@@ -9,10 +10,18 @@ const styles = StyleSheet.create({
 });
 
 const Restaurants = (props) => {
+  const{navigation} = props;
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(userInfo =>{
+      setUser(userInfo);
+    })
+  });
   return (
     <View style={styles.viewBody}>
       <Text>Restaurants</Text>
-      <AddButton text={"Added restaurants"} />
+      {user && <AddButton navigation={navigation}/>
+      }
     </View>
   );
 };
