@@ -66,6 +66,27 @@ const UploadImage = (props) => {
       }
     }
   };
+  const removeImage = image =>{
+    const arrayImages = imagesSelected;
+    Alert.alert(
+      "Removing image",
+      "Are you sure?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+
+        },
+        {
+          text: "Removing image",
+          onPress: () => setImagesSelected(
+            arrayImages.filter(imageUrl => imageUrl !== image)
+          )
+        }
+      ],
+      {cancelable: false}
+    )
+  };
 
   return (
     <View style={styles.viewImages}>
@@ -82,7 +103,7 @@ const UploadImage = (props) => {
       {imagesSelected.map((imageRestaurant, index) => (
         <Avatar
           key={index}
-          onPress={() => console.log("Deleting image")}
+          onPress={() => removeImage(imageRestaurant)}
           style ={styles.miniatureStyle}
           source={{uri: imageRestaurant}}
         />
